@@ -1,0 +1,48 @@
+{% extends 'template.html.twig' %}
+
+{% block titre %}Les détails d'une personne
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+			 
+				{% if personne.image is not null %}
+					<img src="{{asset('uploads/personnes/')}}{{personne.image}}" alt="Photo de profil" class="img-fluid rounded-circle">
+				{% else %}
+					<p>Aucune photo disponible</p>
+				{% endif %}
+			</div>
+			<div class="col-md-8">
+				<h2>{{ personne.firstName }}
+					{{ personne.name }}</h2>
+				<p>
+					<strong>Age:</strong>
+					{{ personne.age }}</p>
+				<p>
+					<strong>Job:</strong>
+					{{ personne.job is not null ? personne.job.designation : 'N/A' }}
+				</p>
+				{% if personne.profile is not null %}
+					<p>
+						<strong>Profile:</strong>
+						<a href="{{ personne.profile.url }}">{{ personne.profile.rs }}</a>
+					</p>
+				{% endif %}
+				{% if personne.hobbies is not empty %}
+					<p>
+						<strong>Hobbies:</strong>
+						{% for hobby in personne.hobbies %}
+							<span class="badge bg-primary">{{ hobby.designation }}</span>
+						{% endfor %}
+					</p>
+				{% endif %}
+				<p>
+			</div>
+			
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details de la personne</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+       h2 {
+            margin-bottom: 10px;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .badge {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+   
+    {% if personne.image is not null %}
+        <img src="{{imageSrc}}" alt="Photo de {{ personne.firstName }} {{ personne.name }}">
+    {% else %}
+        <p>Aucune photo disponible</p>
+    {% endif %}
+
+    <h2>{{ personne.firstName }} {{ personne.name }}</h2>
+    <p>
+        <strong>Age:</strong> {{ personne.age }}
+    </p>
+    <p>
+        <strong>Job:</strong> {{ personne.job is not null ? personne.job.designation : 'N/A' }}
+    </p>
+    {% if personne.profile is not null %}
+        <p>
+            <strong>Profile:</strong>
+            <a href="{{ personne.profile.url }}">{{ personne.profile.rs }}</a>
+        </p>
+    {% endif %}
+
+    {% if personne.hobbies is not empty %}
+        <p>
+            <strong>Hobbies:</strong>
+            {% for hobby in personne.hobbies %}
+                <span class="badge bg-primary">{{ hobby.designation }}</span>
+            {% endfor %}
+        </p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'template.html.twig' %}
+
+{% block titre %}Modifier une personne
+{% endblock %}
+
+{% block body %}
+	<form action ="{{path('personne.update',{'personne': personne.id})}}" method="post">
+		<div class="row">
+			<div class="col">
+				<label for="firstName" class="col-sm-2 control-label">First Name</label>
+				<input value="{{personne.firstName}}" type="text" class="form-control" name="firstName">
+			</div>
+
+			<div class="col">
+				<label for="name" class="col-sm-2 control-label">Name</label>
+				<input value="{{personne.name}}" type="text" class="form-control" name="name">
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col">
+				<label for="age" class="col-sm-2 control-label">Age</label>
+				<input value="{{personne.age}}" type="text" class="form-control" name="age">
+			</div>
+
+			<div class="col">
+				<label for="job" class="col-sm-2 control-label">Job</label>
+				<input value="{{personne.job}}" type="text" class="form-control" name="job">
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col">
+				<button type="submit" class="btn btn-primary">Modifier</button>
+				<button type="button" class="btn btn-secondary">Annuler</button>
+			</div>
+		</div>
+	</form>
+
+{% endblock %}

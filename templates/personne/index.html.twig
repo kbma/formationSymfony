@@ -1,0 +1,83 @@
+{% extends 'template.html.twig' %}
+
+{% block titre %}Liste des personnes
+{% endblock %}
+
+{% block body %}
+
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">FirstName</th>
+				<th scope="col">Name</th>
+				<th scope="col">Age</th>
+				<th scope="col">Job</th>
+				<th scope="col">Détails</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			{% for personne in personnes %}
+
+				<tr>
+					<th scope="row">{{ personne.id}}</th>
+					<td>{{ personne.firstName}}</td>
+					<td>{{ personne.name}}</td>
+					<td>{{ personne.age}}</td>
+					<td>
+						{{ personne.job is not null ? personne.job.designation : 'N/A' }}</td>
+					<td>
+						<a class="btn btn-primary" href="{{path('personne.details',{'personne': personne.id})}}">Détails<a>
+
+								<a class="btn btn-warning" href="{{path('personne.add',{'id': personne.id})}}">
+									<i class="fa-solid fa-user-pen"></i>
+									<a>
+										<a class="btn btn-info" href="{{path('personne.pdf',{'id': personne.id})}}">
+											<i class="fa-solid fa-file"></i>
+											<a>
+
+												{% if is_granted('ROLE_ADMIN')%}
+													<a class="btn btn-success" href="{{path('personne.modifier',{'personne': personne.id})}}">Modifier<a>
+
+
+															<a class="btn btn-danger" href="{{path('personne.supprimer',{'personne': personne.id})}}">
+																<i class="fa-solid fa-user-xmark"></i>
+																<a>
+																{% endif %}
+
+
+															</td>
+														</tr>
+													{% endfor %}
+												</tbody>
+
+											</table>
+
+											{% if page is defined %}
+												<nav aria-label="Page navigation example">
+													<ul class="pagination">
+														{% if page != 1 %}
+															<li class="page-item">
+																<a class="page-link" href="{{ path('personne.list',{page:page - 1 ,nbre:nbre})}}">Précédent</a>
+															</li>
+														{% endif %}
+
+														{% for i in 1 .. totalPages %}
+															<li class="page-item {% if page == i %} active {% endif %}">
+																<a class="page-link" href="{{ path('personne.list',{page:i,nbre:nbre})}}">{{ i
+}}</a>
+															</li>
+														{% endfor %}
+
+														{% if page != totalPages %}
+															<li class="page-item">
+																<a class="page-link" href="{{ path('personne.list',{page:page + 1 ,nbre:nbre})}}">Suivant</a>
+															</li>
+														{% endif %}
+													</ul>
+												</nav>
+
+											{% endif %}
+										{% endblock %}

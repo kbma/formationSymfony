@@ -1,0 +1,27 @@
+{% extends 'heritage.html.twig' %}
+
+{% block titre %}{{parent()}}
+{% endblock %}
+
+{% block content %}
+
+	Bonjour
+	{{name}}
+	<br>
+	{% if auth %}
+		vous etes authentifié
+	{% else  %}
+		Il faut authentifier
+	{% endif  %}
+	<br>
+	Message:
+	{{message}}
+	<br>
+	Vous competences sont:
+	<ol>
+		{% for s in skils %}
+			<li>{{ s}}</li>
+		{% endfor %}
+	</ol>
+
+{% endblock %}

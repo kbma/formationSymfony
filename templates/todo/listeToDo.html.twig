@@ -1,0 +1,24 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Todos!
+{% endblock %}
+{% block titre %}Todos!
+{% endblock %}
+
+{% block body %}
+	{# {{
+		render(controller(
+			'App\\Controller\\FirstController::message',
+			{name:'ABBASSI', lastname:'Kamel'}
+		))
+	}} #}
+
+
+	<ul class="list-group">
+		{% for cle, valeur in app.session.get("todos") %}
+			<li class="list-group-item">{{cle }}:{{valeur}}</li>
+		{% endfor %}
+	</ul>
+
+
+{% endblock %}
